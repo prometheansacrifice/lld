@@ -50,6 +50,8 @@ static StringRef sectionTypeToString(uint32_t SectionType) {
     return "CODE";
   case WASM_SEC_DATA:
     return "DATA";
+  case WASM_GC_OPT_IN:
+    return "GC_OPT_IN";
   default:
     fatal("invalid section type");
   }
