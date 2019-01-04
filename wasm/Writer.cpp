@@ -93,6 +93,7 @@ private:
   void createRelocSections();
   void createLinkingSection();
   void createNameSection();
+  void createWasmGCOptInSection();
 
   void writeHeader();
   void writeSections();
@@ -307,6 +308,13 @@ void Writer::createCustomSections() {
     LLVM_DEBUG(dbgs() << "createCustomSection: " << Name << "\n");
     OutputSections.push_back(make<CustomSection>(Name, Pair.second));
   }
+}
+
+void Writer::createWasmGCOptInSection() {
+  log("createWasmGCOptInSection");
+  SyntheticSection *Section = createSyntheticSection(WASM_GC_OPT_IN);
+  raw_ostream &OS = Section->getStream();
+  writeU8(OS, 1, "gc version");  
 }
 
 void Writer::createElemSection() {
@@ -678,6 +686,7 @@ SyntheticSection *Writer::createSyntheticSection(uint32_t Type,
 
 void Writer::createSections() {
   // Known sections
+  createWasmGCOptInSection();
   createTypeSection();
   createImportSection();
   createFunctionSection();
