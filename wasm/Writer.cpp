@@ -314,7 +314,7 @@ void Writer::createWasmGCOptInSection() {
   log("createWasmGCOptInSection");
   SyntheticSection *Section = createSyntheticSection(WASM_GC_OPT_IN);
   raw_ostream &OS = Section->getStream();
-  writeU8(OS, 1, "gc version");  
+  writeU8(OS, 2, "gc version");  
 }
 
 void Writer::createElemSection() {
