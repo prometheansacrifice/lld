@@ -29,6 +29,8 @@ static const char *valueTypeToString(ValType Type) {
     return "f32";
   case wasm::ValType::F64:
     return "f64";
+  case wasm::ValType::ANYREF:
+    return "anyref";
   default:
     llvm_unreachable("invalid value type");
   }
@@ -189,6 +191,8 @@ std::string lld::toString(ValType Type) {
     return "V128";
   case ValType::EXCEPT_REF:
     return "except_ref";
+  case ValType::ANYREF:
+    return "anyref";
   }
   llvm_unreachable("Invalid wasm::ValType");
 }
